@@ -1,0 +1,97 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Playlist;
+use App\Tracks as Track;
+use Auth;
+use App\Http\Requests;
+
+class PlaylistController extends Controller
+{
+    //
+    public function getIndex()
+    {
+    	$user = Auth::user();
+    	$playlists = Playlist::where('added_by', $user->id)->select('id', 'name', 'added_by')->get();
+    	return response()->success(compact('playlists'));
+    }
+
+    public function deletePlaylist($id)
+    {
+    	$playlist = Playlist::find($id)->delete();
+    }
+
+    public function getPlaylist($id)
+    {
+    	$playlist = Playlist::select('id', 'name')->with('tracks')->find($id);
+    	return response()->success($playlist);
+    }
+
+    public function postPlaylist(Request $request)
+    {
+    	$data = $request->all();
+
+    	if (isset($data['id'])) {
+    		$playlist = Playlist::find($data['id']);
+    	} else {
+    		$user = Auth::user();
+    		$playlist = new Playlist();
+    		$playlist->added_by = $user->id;
+    	}
+    	$playlist->name = $data['name'];
+    	$playlist->save();
+    }
+
+    public function postAddToPlaylist(Request $request)
+    {
+        $user = Auth::user();
+        $playlists = $request->playlists;
+        $videoId = $request->track;
+        $title = $request->title;
+        $track = Track::where('video_id', $videoId)->first();
+
+        if ($track) {
+            $trackId = $track->id;
+        } else {
+            $track = new Track();
+            $track->video_id = $videoId;
+            $track->title = $title;
+            $track->save();
+            $trackId = $track->id;
+        }
+
+        $existing = Playlist::select('id')
+        ->where('added_by', $user->id)
+        ->whereHas('tracks', function($q) use($trackId) {
+            $q->where('video_id', $trackId);
+        })
+        ->get();
+        foreach ($existing as $play) {
+            $key = array_search($play->id, $playlists);
+            if ($key) {
+                array_splice($playlists, $key, 1);
+            } else {
+                $play->tracks()->detach($trackId);
+            }
+        }
+
+        foreach ($playlists as $addPLay) {
+            $track->playlists()->attach($addPLay);
+        }
+    }
+
+    public function getPlaylistByTrack($trackId)
+    {
+        $user = Auth::user();
+        $playlists = Playlist::select('id', 'name')
+        ->where('added_by', $user->id)
+        ->whereHas('tracks', function($q) use($trackId) {
+            $q->where('video_id', $trackId);
+        })
+        ->get();
+
+        return response()->success($playlists);
+    }
+}

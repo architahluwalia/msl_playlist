@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="vm.closeModal()"><span
+    aria-hidden="true"><i class="icon icon-Close"></i></span></button>
+    <h4 class="modal-title">Playlists Map</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <form ng-submit="vm.saveData(vm.form.$valid)" name="vm.form" novalidate>
+                <md-input-container>
+                <label>Select PlayLists</label>
+                <md-select ng-model="selectedPlay" multiple>
+                <!-- <md-option ng-value="none"><em>None</em></md-option> -->
+                <md-option ng-repeat="playlist in playlists" ng-value="playlist.id">
+                {{playlist.name}}
+                </md-option>
+                </md-select>
+                </md-input-container>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn" ng-click="vm.closeModal()" >Cancel</button>
+    <button type="button" class="btn" ng-disabled="vm.form.$invalid" ng-click="vm.save(vm.form.$valid)">Save</button>
+</div>

@@ -41,91 +41,25 @@ export function RoutesConfig ($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('app.tablessimple', {
-      url: '/tables-simple',
+    .state('app.videosearch', {
+      url: '/search',
       data: {
         auth: true
       },
       views: {
         'main@app': {
-          template: '<tables-simple></tables-simple>'
+          template: '<video-search></video-search>'
         }
       }
     })
-    .state('app.uiicons', {
-      url: '/ui-icons',
+    .state('app.playlist', {
+      url: '/playlist',
       data: {
         auth: true
       },
       views: {
         'main@app': {
-          template: '<ui-icons></ui-icons>'
-        }
-      }
-    })
-    .state('app.uimodal', {
-      url: '/ui-modal',
-      data: {
-        auth: true
-      },
-      views: {
-        'main@app': {
-          template: '<ui-modal></ui-modal>'
-        }
-      }
-    })
-    .state('app.uitimeline', {
-      url: '/ui-timeline',
-      data: {
-        auth: true
-      },
-      views: {
-        'main@app': {
-          template: '<ui-timeline></ui-timeline>'
-        }
-      }
-    })
-    .state('app.uibuttons', {
-      url: '/ui-buttons',
-      data: {
-        auth: true
-      },
-      views: {
-        'main@app': {
-          template: '<ui-buttons></ui-buttons>'
-        }
-      }
-    })
-    .state('app.uigeneral', {
-      url: '/ui-general',
-      data: {
-        auth: true
-      },
-      views: {
-        'main@app': {
-          template: '<ui-general></ui-general>'
-        }
-      }
-    })
-    .state('app.formsgeneral', {
-      url: '/forms-general',
-      data: {
-        auth: true
-      },
-      views: {
-        'main@app': {
-          template: '<forms-general></forms-general>'
-        }
-      }
-    })
-    .state('app.chartjs', {
-      url: '/charts-chartjs',
-      data: {
-        auth: true
-      },
-      views: {
-        'main@app': {
-          template: '<charts-chartjs></charts-chartjs>'
+          template: '<playlist-list></playlist-list>'
         }
       }
     })
@@ -258,17 +192,6 @@ export function RoutesConfig ($stateProvider, $urlRouterProvider) {
       params: {
         alerts: null,
         roleId: null
-      }
-    })
-    .state('app.widgets', {
-      url: '/widgets',
-      data: {
-        auth: true
-      },
-      views: {
-        'main@app': {
-          template: '<widgets></widgets>'
-        }
       }
     })
     .state('login', {

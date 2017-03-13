@@ -27,11 +27,11 @@ class PasswordResetController extends Controller
 
         $token = $reset->token;
 
-        Mail::send('emails.reset_link', compact('email', 'token'), function ($mail) use ($email) {
-            $mail->to($email)
-            ->from('noreply@example.com')
-            ->subject('Password reset link');
-        });
+        // Mail::send('emails.reset_link', compact('email', 'token'), function ($mail) use ($email) {
+        //     $mail->to($email)
+        //     ->from('noreply@example.com')
+        //     ->subject('Password reset link');
+        // });
 
         return response()->success(true);
     }

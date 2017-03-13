@@ -13,3 +13,14 @@
 .dataTables_paginate .pagination {
     margin: 0px
 }
+.md-virtual-repeat-container.md-autocomplete-suggestions-container,
+.md-select-menu-container {
+    z-index: 10000;
+}
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    overflow-y: auto !important;
+}

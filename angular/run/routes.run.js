@@ -42,6 +42,27 @@ export function RoutesRun ($rootScope, $state, $auth, AclService, $timeout, API,
       }
     })
   }
+  $rootScope.openEditModal = function(template, mainScope, filterId = null) {
+    let vm = mainScope;
+    console.log('mani', filterId);
+    if (filterId !== null) {
+      vm.$scope.filterId = filterId;
+    } else {
+      vm.$scope.filterId = null;
+    }
+    console.log('mani', vm);
+    vm.$scope.modalInstance = vm.uibModal.open({
+      animation: true,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      template: '<' + template + '></' + template + '>',
+      size: 'small',
+      // appendTo: angular.element(document.querySelector('.userWrapper:eq(0)')),
+      windowTopClass: 'userWrapper',
+      windowClass: 'uni-album',
+      scope: vm.$scope
+    });
+  };
 
   $rootScope.$on('$destroy', deregisterationCallback)
   $rootScope.$on('$stateChangeSuccess', stateChange)
