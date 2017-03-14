@@ -35,7 +35,7 @@ return [
     */
 
     // 'default' => env('DB') == 'clearDB'?  env('DB_CONNECTION', 'mysql') : env('clearDB', 'mysql'),
-    'default' => env('DB_CONNECTION',  env('DB')), 
+    'default' => env('DB_CONNECTION', env('DB')),
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -80,7 +80,7 @@ return [
             'host'      => $host,
             'database'  => $database,
             'username'  => $username,
-            'password'  => $password
+            'password'  => $password,
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
