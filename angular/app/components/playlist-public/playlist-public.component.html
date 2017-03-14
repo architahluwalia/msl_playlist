@@ -1,0 +1,33 @@
+<section class="content">
+  <div class= "row">
+    <div class="col-md-12">
+      <div class="box box-danger">
+        <div class="box-header with-border">
+          <h3 class="box-title">Playlist: {{vm.playlist.name}}</h3>
+          <div class="box-tools pull-right">
+          </div>
+        </div>
+        <div class="box-body no-padding">
+          <ul class="users-list clearfix">
+            <li ng-repeat="(id, video) in vm.playlist.videos">
+              <ng-youtube-embed
+                video="video.video_id"
+                autoplay="false"
+                color="white"
+                disablekb="true"
+                end="20"
+                width="200px"
+                height="150px">
+              </ng-youtube-embed>
+              <span>{{video.title}}</span>
+              <!-- <span ><a ng-click="vm.openEditModal('video-playlist-map', vm, {id:video.id.videoId, playlists:playlists, title: video.snippet.title})" href="javascript:void(0)">Add to playlist</a></span> -->
+            </li>
+          </ul>
+        </div>
+        <div class="box-footer text-center">
+          <a href="javascript:void(0)" class="uppercase">View All Users</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

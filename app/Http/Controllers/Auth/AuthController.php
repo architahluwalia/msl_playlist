@@ -91,9 +91,9 @@ class AuthController extends Controller
 
         $authUser = $this->findOrCreateUser($user, $provider);
 
-        \Auth::login($authUser, true);
-
-        return \Redirect::to('/#/login-loader');
+        Auth::login($authUser, true);
+        // dd(Auth::user());
+        return \Redirect::to('/#!/login-loader');
     }
 
     /**

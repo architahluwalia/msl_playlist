@@ -1,3 +1,4 @@
+import {PlaylistPublicComponent} from './app/components/playlist-public/playlist-public.component';
 import {VideoPlaylistMapComponent} from './app/components/video-playlist-map/video-playlist-map.component';
 import {PlaylistEditComponent} from './app/components/playlist-edit/playlist-edit.component';
 import {PlaylistListComponent} from './app/components/playlist-list/playlist-list.component';
@@ -23,6 +24,7 @@ import { LoginFormComponent } from './app/components/login-form/login-form.compo
 import { RegisterFormComponent } from './app/components/register-form/register-form.component'
 
 angular.module('app.components')
+	.component('playlistPublic', PlaylistPublicComponent)
 	.component('videoPlaylistMap', VideoPlaylistMapComponent)
 	.component('playlistEdit', PlaylistEditComponent)
 	.component('playlistList', PlaylistListComponent)

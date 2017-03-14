@@ -30,7 +30,7 @@ class VideoPlaylistMapController{
         if ($valid) {
             this.API.service('add-to-playlist', this.API.all('playlists')).post({playlists : this.$scope.selectedPlay, track: vm.$scope.$parent.filterId.id, title:vm.$scope.title})
             .then(function(response) {
-                swal('success', 'New Playlist Created', 'success');
+                swal('success', 'Song added to playlist', 'success');
                 vm.closeModal();
             });
         }

@@ -13,35 +13,46 @@ class PlaylistController extends Controller
     //
     public function getIndex()
     {
-    	$user = Auth::user();
-    	$playlists = Playlist::where('added_by', $user->id)->select('id', 'name', 'added_by')->get();
-    	return response()->success(compact('playlists'));
+        $user = Auth::user();
+        $playlists = Playlist::where('added_by', $user->id)->select('id', 'name', 'added_by')->get();
+        return response()->success(compact('playlists'));
     }
 
     public function deletePlaylist($id)
     {
-    	$playlist = Playlist::find($id)->delete();
+        $playlist = Playlist::find($id)->delete();
     }
 
     public function getPlaylist($id)
     {
-    	$playlist = Playlist::select('id', 'name')->with('tracks')->find($id);
-    	return response()->success($playlist);
+        $playlist = Playlist::select('id', 'name')->with('tracks')->find($id);
+        return response()->success($playlist);
     }
 
     public function postPlaylist(Request $request)
     {
-    	$data = $request->all();
+        $user=  Auth::user();
+        $data = $request->all();
 
-    	if (isset($data['id'])) {
-    		$playlist = Playlist::find($data['id']);
-    	} else {
-    		$user = Auth::user();
-    		$playlist = new Playlist();
-    		$playlist->added_by = $user->id;
-    	}
-    	$playlist->name = $data['name'];
-    	$playlist->save();
+        if (isset($data['id'])) {
+            $playlist = Playlist::find($data['id']);
+            $exist = Playlist::where('name', $data['name'])->where('added_by', $user->id)->where('id', '<>', $data['id'])->first();
+        } else {
+            $user = Auth::user();
+            $playlist = new Playlist();
+            $playlist->added_by = $user->id;
+            $exist = Playlist::where('name', $data['name'])->where('added_by', $user->id)->first();
+        }
+        if ($exist) {
+            return response()->error('You already have a playlist with the same name!');
+        }
+        $playlist->name = $data['name'];
+        $playlist->save();
+        if (isset($data['unchecked'])) {
+            foreach ($data['unchecked'] as $removeTrack) {
+                $playlist->tracks()->detach($removeTrack);
+            }
+        }
     }
 
     public function postAddToPlaylist(Request $request)
@@ -64,7 +75,7 @@ class PlaylistController extends Controller
 
         $existing = Playlist::select('id')
         ->where('added_by', $user->id)
-        ->whereHas('tracks', function($q) use($trackId) {
+        ->whereHas('tracks', function ($q) use ($trackId) {
             $q->where('video_id', $trackId);
         })
         ->get();
@@ -87,7 +98,7 @@ class PlaylistController extends Controller
         $user = Auth::user();
         $playlists = Playlist::select('id', 'name')
         ->where('added_by', $user->id)
-        ->whereHas('tracks', function($q) use($trackId) {
+        ->whereHas('tracks', function ($q) use ($trackId) {
             $q->where('video_id', $trackId);
         })
         ->get();
