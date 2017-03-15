@@ -26,5 +26,5 @@
 
 <Filesmatch "\.(jpg|jpeg|png|gif|js|css|swf|ico|woff|mp3)$">
     ExpiresActive on
-    ExpiresDefault "access plus 2 days"
+    ExpiresDefault "access plus 1 years"
 </Filesmatch>
