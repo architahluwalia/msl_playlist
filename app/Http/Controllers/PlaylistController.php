@@ -11,10 +11,19 @@ use App\Http\Requests;
 class PlaylistController extends Controller
 {
     //
-    public function getIndex()
+    public function getIndex($type = 'back')
     {
-        $user = Auth::user();
-        $playlists = Playlist::where('added_by', $user->id)->select('id', 'name', 'added_by')->get();
+        if ($type == 'front') {
+            $playlists = Playlist::select('id', 'name', 'added_by', 'created_at')
+            ->with(['added' => function($q) {
+                $q->select('id', 'name');
+            }])
+            ->orderBy('created_at', 'desc')
+            ->get();            
+        } else {
+            $user = Auth::user();
+            $playlists = Playlist::where('added_by', $user->id)->select('id', 'name', 'added_by')->get();
+        }
         return response()->success(compact('playlists'));
     }
 

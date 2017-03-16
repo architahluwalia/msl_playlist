@@ -7,50 +7,78 @@ class PlaylistListController {
         vm.$scope = $scope
         vm.uibModal = $uibModal;
         this.dtInstance = {};
-
-        this.openEditModal = $rootScope.openEditModal;
+        let stateName = $state.current.name;
         let playlists = this.API.service('playlists')
-        this.dtOptions = DTOptionsBuilder
-            .fromFnPromise(function() {
-                return playlists.getList();
-            })
-            // .newOptions()                    
-            .withOption('createdRow', function(row) {
-                $compile(angular.element(row).contents())($scope)
-            })
-            .withOption('responsive', true)
-            .withOption('order', [1, 'desc'])
-            .withOption('reloadData', function() {
-                this.reload = true;
-                return this;
-            })
-            .withBootstrap()
+        if ('front.playlists' === stateName) {
+            this.tempUrl = './views/app/components/playlist-list/playlist-list.front.html';
+            playlists.one('front').get().then(function(response) {
+                response = response.plain();
+                vm.$scope.playlists = response.data.playlists;
+            });
+        } else {
+            this.tempUrl = './views/app/components/playlist-list/playlist-list.component.html';
+            this.dtOptions = DTOptionsBuilder
 
-        this.dtColumns = [
-            DTColumnBuilder.newColumn('name').withTitle('Name'),
-            DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
-            .renderWith(function(data) {
-                return `
+                .fromFnPromise(function() {
+                    return playlists.getList();
+                })
+                // .newOptions()                    
+                .withOption('createdRow', function(row) {
+                    $compile(angular.element(row).contents())($scope)
+                })
+                .withOption('responsive', true)
+                .withOption('order', [1, 'desc'])
+                .withOption('reloadData', function() {
+                    this.reload = true;
+                    return this;
+                })
+                .withBootstrap()
+
+            this.dtColumns = [
+                DTColumnBuilder.newColumn('name').withTitle('Name'),
+                DTColumnBuilder.newColumn(null).withTitle('Actions').notSortable()
+                .renderWith(function(data) {
+                    return `
                 <a class="btn btn-xs btn-warning" ng-click="vm.openEditModal('playlist-edit', vm, {id: ${data.id}})">
                     <i class="fa fa-edit"></i>
                 </a>
                 &nbsp
                 <button class="btn btn-xs btn-danger" ng-click="vm.delete(${data.id})">
                     <i class="fa fa-trash-o"></i>
+                </button>
+                &nbsp
+                <button class="btn btn-xs btn-warning" ng-click="vm.share(${data.id})">
+                    <i class="fa fa-share"></i>
                 </button>`;
-            })
-        ]
+                })
+            ]
 
-        this.displayTable = true
+            this.displayTable = true
+        }
+
+        this.openEditModal = $rootScope.openEditModal;
 
     }
 
-
+    share(id) {
+        swal({
+            title: 'Sharable url:',
+            text: this.$state.href('front.playlist-public', {
+                'id': id
+            }, {
+                absolute: true
+            }),
+            type: 'success',
+            showCancelButton: false,
+            // confirmButtonText: 'Reset token!',
+            // cancelButtonText: 'OK',
+            closeOnConfirm: true,
+            // closeOnCancel: true
+        });
+    }
     getupdatedData() {
         let vm = this;
-        vm.dtInstance.reloadData(function(json) {
-            console.log('json', json)
-        }, false);
+        vm.dtInstance.reloadData(function(json) {}, false);
     }
 
     delete(id) {
@@ -86,7 +114,7 @@ class PlaylistListController {
 }
 
 export const PlaylistListComponent = {
-    templateUrl: './views/app/components/playlist-list/playlist-list.component.html',
+    template: '<div ng-include="vm.tempUrl"></div>',
     controller: PlaylistListController,
     controllerAs: 'vm',
     bindings: {}

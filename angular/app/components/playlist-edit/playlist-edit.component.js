@@ -77,7 +77,6 @@ class PlaylistEditController {
     }
 
     save($valid) {
-        console.log(this.form);
         let vm = this;
         if ($valid) {
             this.API.service('playlist', this.API.all('playlists')).post(this.$scope.playlist)

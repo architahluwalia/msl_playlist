@@ -18,10 +18,8 @@ class VideoSearchController{
 
     search(){
         let vm = this; 
-        console.log(this);
        let search = this.API.service('video-search', this.API.all('ytvideo')).one(vm.query)
         search.get().then(function (response) {
-            console.log(response);
             response = response.plain();
             vm.videos = response.data;
         });
@@ -30,7 +28,6 @@ class VideoSearchController{
     addTo(id) {
         this.showPlaylist = {};
         this.showPlaylist[id] = id;
-        console.log(this.showPlaylist);
     }
 
     $onInit(){

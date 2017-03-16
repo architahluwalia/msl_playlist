@@ -4,8 +4,8 @@ class NavHeaderController {
 
         let navHeader = this
         let stateName = $state.current.name;
-        console.log($state);
-        if (stateName.indexOf('strange.') >= 0) {
+        if (stateName.indexOf('front.') >= 0) {
+            angular.element("body").addClass('sidebar-collapse');
             this.tempUrl = './views/app/components/nav-header/nav-header.front.html';
         } else {
             this.tempUrl = './views/app/components/nav-header/nav-header.component.html';

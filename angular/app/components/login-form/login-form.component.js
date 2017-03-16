@@ -8,7 +8,10 @@ class LoginFormController {
     this.$state = $state
     this.$stateParams = $stateParams
     this.AclService = AclService
-
+    if ($auth.isAuthenticated()) {
+        // event.preventDefault()
+        return $state.go('app.landing');
+    }
     this.registerSuccess = $stateParams.registerSuccess
     this.successMsg = $stateParams.successMsg
     this.loginfailederror = ''

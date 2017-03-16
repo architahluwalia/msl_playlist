@@ -77,10 +77,10 @@ return [
 
         'clearDB' => array(
             'driver'    => 'mysql',
-            'host'      => $host,
-            'database'  => $database,
-            'username'  => $username,
-            'password'  => $password,
+            'host'      => env('DB') == 'clearDB'?$host:'',
+            'database'  => env('DB') == 'clearDB'?$database:'',
+            'username'  => env('DB') == 'clearDB'?$username:'',
+            'password'  => env('DB') == 'clearDB'?$password:'',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

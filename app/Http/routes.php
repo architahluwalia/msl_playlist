@@ -27,6 +27,7 @@ $api->group(['middleware' => ['api']], function ($api) {
     $api->get('auth/password/verify', 'Auth\PasswordResetController@verify');
     $api->post('auth/password/reset', 'Auth\PasswordResetController@reset');
     $api->get('playlist/{id}', 'PlaylistController@getPlaylist');
+    $api->get('playlists/{type}', 'PlaylistController@getIndex');
 });
 
 $api->group(['middleware' => ['api', 'api.auth']], function ($api) {

@@ -41,7 +41,7 @@ elixir(function (mix) {
       './public/css/vendor.css',
       './public/css/app.css',
       './public/dist/css/ionicons-2.0.1.min.css',
-      './public/dist/css/font-awesome-4.5.0.min.css',
+      // './public/dist/css/font-awesome-4.5.0.min.css',
       './public/dist/css/google-font.css'
     ],
     karmaJsDir = [

@@ -8,8 +8,8 @@
           </div>
         </div>
         <div class="box-body no-padding">
-          <ul class="users-list clearfix">
-            <li ng-repeat="(id, video) in vm.playlist.videos">
+          <ul class="clearfix">
+            <li ng-repeat="(id, video) in vm.playlist.videos" class="col-sm-6 col-lg-4 col-md-4 col-xs-12">
               <ng-youtube-embed
                 video="video.video_id"
                 autoplay="false"
@@ -25,7 +25,7 @@
           </ul>
         </div>
         <div class="box-footer text-center">
-          <a href="javascript:void(0)" class="uppercase">View All Users</a>
+          <a href="javascript:void(0)" class="uppercase">View More</a>
         </div>
       </div>
     </div>

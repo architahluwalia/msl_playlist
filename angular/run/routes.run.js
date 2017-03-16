@@ -5,10 +5,11 @@ export function RoutesRun($rootScope, $state, $auth, AclService, $timeout, API, 
 
     /*eslint-disable */
     let deregisterationCallback = $rootScope.$on('$stateChangeStart', function(event, toState) {
+        $rootScope.title = toState.title;
         if (toState.data && toState.data.auth) {
             if (!$auth.isAuthenticated()) {
                 event.preventDefault()
-                return $state.go('login')
+                return $state.go('front.playlists')
             }
         }
 

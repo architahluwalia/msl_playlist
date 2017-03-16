@@ -31,18 +31,18 @@ export function RoutesConfig($stateProvider, $urlRouterProvider, $locationProvid
                 bodyClass: 'hold-transition skin-blue sidebar-mini'
             }
         })
-        .state('strange', {
+        .state('front', {
             abstract: true,
             views: {
                 'layout': {
                     templateUrl: getLayout('front-layout')
                 },
-                'header@strange': {
+                'header@front': {
                     template: '<nav-header></nav-header>'
-                },
-                'footer@strange': {
+                },/*
+                'footer@front': {
                     templateUrl: getView('footer')
-                },
+                },*/
                 main: {}
             },
             data: {
@@ -54,9 +54,10 @@ export function RoutesConfig($stateProvider, $urlRouterProvider, $locationProvid
             data: {
                 auth: true
             },
+            title: "Home",
             views: {
                 'main@app': {
-                    template: '<playlist-list></playlist-list>'
+                    template: '<dashboard></dashboard>'
                 }
             }
         })
@@ -65,6 +66,7 @@ export function RoutesConfig($stateProvider, $urlRouterProvider, $locationProvid
             data: {
                 auth: true
             },
+            title: "Search",
             views: {
                 'main@app': {
                     template: '<video-search></video-search>'
@@ -76,20 +78,46 @@ export function RoutesConfig($stateProvider, $urlRouterProvider, $locationProvid
             data: {
                 auth: true
             },
+            title: "Playlists",
             views: {
                 'main@app': {
                     template: '<playlist-list></playlist-list>'
                 }
             }
         })
-        .state('strange.playlist-public', {
+        // .state('front.landing', {
+        //     url: '/playlist/:id',
+        //     // data: {
+        //     // auth: true
+        //     // },
+        //     title: "Playlist",
+        //     views: {
+        //         'main@front': {
+        //             template: '<playlist-public></playlist-public>'
+        //         }
+        //     }
+        // })
+        .state('front.playlist-public', {
             url: '/playlist/:id',
             // data: {
             // auth: true
             // },
+            title: "Playlist",
             views: {
-                'main@strange': {
+                'main@front': {
                     template: '<playlist-public></playlist-public>'
+                }
+            }
+        })
+        .state('front.playlists', {
+            url: '/playlists',
+            // data: {
+            // auth: true
+            // },
+            title: "Playlists All",
+            views: {
+                'main@front': {
+                    template: '<playlist-list></playlist-list>'
                 }
             }
         })
@@ -109,6 +137,7 @@ export function RoutesConfig($stateProvider, $urlRouterProvider, $locationProvid
             data: {
                 auth: true
             },
+            title: "Profile",
             views: {
                 'main@app': {
                     template: '<user-profile></user-profile>'
@@ -236,6 +265,7 @@ export function RoutesConfig($stateProvider, $urlRouterProvider, $locationProvid
             data: {
                 bodyClass: 'hold-transition login-page'
             },
+            title: "Login",
             params: {
                 registerSuccess: null,
                 successMsg: null
@@ -263,6 +293,7 @@ export function RoutesConfig($stateProvider, $urlRouterProvider, $locationProvid
                 'header@app': {},
                 'footer@app': {}
             },
+            title: "Register",
             data: {
                 bodyClass: 'hold-transition register-page'
             }
@@ -290,6 +321,7 @@ export function RoutesConfig($stateProvider, $urlRouterProvider, $locationProvid
                 'header@app': {},
                 'footer@app': {}
             },
+            title: "Forgot Password",
             data: {
                 bodyClass: 'hold-transition login-page'
             }
