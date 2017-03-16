@@ -10,7 +10,8 @@
         "lteSkin": "skin-blue.css"
     },
     "fonts": {
-        "outputFolder": "public/fonts"
+        "outputFolder": "public/fonts",
+        "outputFolder1": "public/dist/fonts"
     },
     "buildPath": "public/build"
 }

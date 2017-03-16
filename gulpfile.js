@@ -25,6 +25,7 @@ elixir(function (mix) {
   var jsOutputFolder = config.js.outputFolder
   var cssOutputFolder = config.css.outputFolder
   var fontsOutputFolder = config.fonts.outputFolder
+  var fontsOutputFolder1 = config.fonts.outputFolder1
   var buildPath = config.buildPath
 
   var assets = [
@@ -41,7 +42,7 @@ elixir(function (mix) {
       './public/css/vendor.css',
       './public/css/app.css',
       './public/dist/css/ionicons-2.0.1.min.css',
-      // './public/dist/css/font-awesome-4.5.0.min.css',
+      './public/dist/css/font-awesome-4.5.0.min.css',
       './public/dist/css/google-font.css'
     ],
     karmaJsDir = [
@@ -70,4 +71,6 @@ elixir(function (mix) {
 
   mix
     .copy(fontsOutputFolder, buildPath + '/fonts')
+    .copy(fontsOutputFolder1, buildPath + '/fonts')
+    // .copy(fontsOutputFolder, buildPath + '/fonts')
 })

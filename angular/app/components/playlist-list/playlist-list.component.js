@@ -52,10 +52,8 @@ class PlaylistListController {
                 </button>`;
                 })
             ]
-
             this.displayTable = true
         }
-
         this.openEditModal = $rootScope.openEditModal;
 
     }
