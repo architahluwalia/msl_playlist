@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="box-body no-padding">
-          <ul class="clearfix" ng-if="vm.playlist.videos.length > 0">
+          <ul class="clearfix playlist" ng-if="vm.playlist.videos.length > 0">
             <li ng-repeat="(id, video) in vm.playlist.videos" class="col-sm-6 col-lg-4 col-md-4 col-xs-12">
               <ng-youtube-embed
                 video="video.video_id"
