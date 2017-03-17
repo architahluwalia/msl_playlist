@@ -1,5 +1,5 @@
 export class APIService {
-    constructor(Restangular, $window) {
+    constructor(Restangular, $window, $rootScope) {
         'ngInject'
         // content negotiation
         var headers = {
@@ -11,6 +11,13 @@ export class APIService {
             RestangularConfigurer
                 .setBaseUrl('/api/')
                 .setDefaultHeaders(headers)
+                .setRestangularizePromiseInterceptor(function(promise) {
+                    $rootScope.isLoading = true;
+                    promise.finally(function() {
+                        $rootScope.isLoading = false;
+                        // delete $rootScope.isLoading;
+                    });
+                })
                 .setErrorInterceptor(function(response) {
                     if (response.status === 401) {
                         $auth.logout().then(function() {

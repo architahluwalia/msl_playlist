@@ -15,11 +15,11 @@ class PlaylistController extends Controller
     {
         if ($type == 'front') {
             $playlists = Playlist::select('id', 'name', 'added_by', 'created_at')
-            ->with(['added' => function($q) {
+            ->with(['added' => function ($q) {
                 $q->select('id', 'name');
             }])
             ->orderBy('created_at', 'desc')
-            ->get();            
+            ->get();
         } else {
             $user = Auth::user();
             $playlists = Playlist::where('added_by', $user->id)->select('id', 'name', 'added_by')->get();
@@ -29,7 +29,10 @@ class PlaylistController extends Controller
 
     public function deletePlaylist($id)
     {
-        $playlist = Playlist::find($id)->delete();
+
+        $playlist = Playlist::find($id);
+        $playlist->tracks()->detach();
+        $playlist->delete();
     }
 
     public function getPlaylist($id)

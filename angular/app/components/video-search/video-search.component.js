@@ -14,6 +14,8 @@ class VideoSearchController{
             let dataSet = response.plain()
             vm.$scope.playlists = dataSet;
         });
+        vm.query = 'recent songs';
+        vm.search();
         //
     }
 

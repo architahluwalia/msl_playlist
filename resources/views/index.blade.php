@@ -21,6 +21,9 @@
 </head>
 <body route-bodyclass>
     <div class="wrapper">
+        <div id="mydiv" ng-show="isLoading">
+            <img src="img/ajax-loader.gif" class="ajax-loader"/>            
+        </div>
         <div ui-view="layout"></div>
         <div class="control-sidebar-bg"></div>
     </div>
