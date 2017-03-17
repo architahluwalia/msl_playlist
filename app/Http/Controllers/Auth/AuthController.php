@@ -196,6 +196,7 @@ class AuthController extends Controller
         $user->email = trim(strtolower($request->email));
         $user->password = bcrypt($request->password);
         $user->email_verification_code = $verificationCode;
+        $user->email_verified = '1';
         $user->save();
 
         $token = JWTAuth::fromUser($user);
