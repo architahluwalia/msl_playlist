@@ -1,52 +1,54 @@
 <section class="content">
-  <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-        <div class="info-box-content">
-          <md-input-container>
-          <label>Search for a song</label>
-          <input name="query" ng-model="vm.query" required >
-          <!--     <div ng-messages="userForm.query.$error" ng-show="userForm.query.$dirty">
-            <div ng-message="required">This is required!</div>
-            <div ng-message="md-maxlength">That's too long!</div>
-            <div ng-message="minlength">That's too short!</div>
-          </div> -->
-          </md-input-container>
-          <button ng-click="vm.search()" class="btn btn-primary">Search</button>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                    <form name="vm.form" novalidate>
+                        <md-input-container>
+                        <label>Search for a song</label>
+                        <input name="query" ng-model="vm.query" required >
+                        <!--     <div ng-messages="userForm.query.$error" ng-show="userForm.query.$dirty">
+                            <div ng-message="required">This is required!</div>
+                            <div ng-message="md-maxlength">That's too long!</div>
+                            <div ng-message="minlength">That's too short!</div>
+                        </div> -->
+                        </md-input-container>
+                        <button ng-click="vm.search()" class="btn btn-primary" ng-disabled="vm.form.$invalid">Search</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class= "row">
-    <div class="col-md-12">
-      <div class="box box-danger">
-        <div class="box-header with-border">
-          <h3 class="box-title">Search Results</h3>
-          <div class="box-tools pull-right">
-          </div>
+    <div class= "row">
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Search Results</h3>
+                    <div class="box-tools pull-right">
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <ul class=" clearfix">
+                        <li ng-repeat="(id, video) in vm.videos" class="col-sm-6 col-lg-4 col-md-4 col-xs-12">
+                            <ng-youtube-embed
+                            video="video.id.videoId"
+                            autoplay="false"
+                            color="white"
+                            disablekb="true"
+                            end="20"
+                            width="200px"
+                            height="150px">
+                            </ng-youtube-embed>
+                            <span>{{video.snippet.title}}</span>
+                            <span ><a ng-click="vm.openEditModal('video-playlist-map', vm, {id:video.id.videoId, playlists:playlists, title: video.snippet.title})" href="javascript:void(0)">Add to playlist</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-footer text-center">
+                    <a href="javascript:void(0)" class="uppercase" ng-click="vm.search(vm.token)">View More</a>
+                </div>
+            </div>
         </div>
-        <div class="box-body no-padding">
-          <ul class=" clearfix">
-            <li ng-repeat="(id, video) in vm.videos" class="col-sm-6 col-lg-4 col-md-4 col-xs-12">
-              <ng-youtube-embed
-                video="video.id.videoId"
-                autoplay="false"
-                color="white"
-                disablekb="true"
-                end="20"
-                width="200px"
-                height="150px">
-              </ng-youtube-embed>
-              <span>{{video.snippet.title}}</span>
-              <span ><a ng-click="vm.openEditModal('video-playlist-map', vm, {id:video.id.videoId, playlists:playlists, title: video.snippet.title})" href="javascript:void(0)">Add to playlist</a></span>
-            </li>
-          </ul>
-        </div>
-        <div class="box-footer text-center">
-          <a href="javascript:void(0)" class="uppercase">View More</a>
-        </div>
-      </div>
     </div>
-  </div>
 </section>
