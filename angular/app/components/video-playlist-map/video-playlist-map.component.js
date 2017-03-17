@@ -12,8 +12,6 @@ class VideoPlaylistMapController{
             angular.forEach(response.data, function (play) {
                 vm.$scope.selectedPlay.push(play.id);
             })
-            console.log(vm.$scope.selectedPlay)
-            console.log(vm.$scope.selectedPlay.length)
             // vm.$scope.selectedPlay = response.data;
         });
 
@@ -26,6 +24,7 @@ class VideoPlaylistMapController{
 
     save($valid) {
         let vm = this;
+
         if ($valid) {
             this.API.service('add-to-playlist', this.API.all('playlists')).post({playlists : this.$scope.selectedPlay, track: vm.$scope.$parent.filterId.id, title:vm.$scope.title})
             .then(function(response) {

@@ -84,7 +84,7 @@ class PlaylistController extends Controller
             $track->save();
             $trackId = $track->id;
         }
-
+        
         $existing = Playlist::select('id')
         ->where('added_by', $user->id)
         ->whereHas('tracks', function ($q) use ($trackId) {

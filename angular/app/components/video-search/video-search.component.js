@@ -33,8 +33,8 @@ class VideoSearchController{
             } else {
                 vm.videos = vm.videos.concat(response.data.results); 
             }
-            console.log(vm.videos);
-            console.log(response);
+            // console.log(vm.videos);
+            // console.log(response);
             // vm.videos.push(response.data.results);
             vm.token = response.data.pageToken;
         });

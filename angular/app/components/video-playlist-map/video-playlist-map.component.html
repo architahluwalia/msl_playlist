@@ -6,8 +6,8 @@
 <div class="modal-body">
     <div class="row">
         <div class="col-sm-12">
-            <form ng-submit="vm.saveData(vm.form.$valid)" name="vm.form" novalidate>
-                <md-input-container ng-if="playlists.length>0">
+            <form name="vm.form" novalidate>
+                <md-input-container ng-show="playlists.length>0">
                 <label>Select PlayLists</label>
                 <md-select ng-model="selectedPlay" multiple>
                 <!-- <md-option ng-value="none"><em>None</em></md-option> -->
@@ -16,7 +16,7 @@
                 </md-option>
                 </md-select>
                 </md-input-container>
-                <span ng-if="playlists.length ==0 ">
+                <span ng-show="playlists.length ==0 ">
                 Create a new playlist first.
                 </span>
             </form>
