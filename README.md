@@ -7,3 +7,8 @@ Judgement criteria:
 2.       Research on the brief to minimise iterations during the execution period. Research includes identifying user personas, user states, user journeys, site mapping, wire framing etc.
 3.       Mobile first design. Design need not be extraordinary but the web app should not just be made to showcase functionality.
 4.       Development should follow industry standards. The web app should fare well on Google PageSpeed Insights. Basic security standards should be followed. API’s should be used well, relevant data should be stored to find optimal balance between data storage cost and data mining. Source code should follow OOP.
+
+Tech stack used:
+    Frontend: AngularJs (1.6.3)
+    Backend: Laravel (5.2)
+    DB: mysql
