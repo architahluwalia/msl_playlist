@@ -113,6 +113,7 @@ class AuthController extends Controller
         return User::create([
             'name' => $oauthUser->name,
             'email' => $oauthUser->email,
+            'email_verified' => '1',
             'oauth_provider' => $provider,
             'oauth_provider_id' => $oauthUser->getId(),
             'avatar' => $oauthUser->avatar,

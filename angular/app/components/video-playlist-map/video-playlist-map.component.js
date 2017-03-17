@@ -12,6 +12,7 @@ class VideoPlaylistMapController{
             angular.forEach(response.data, function (play) {
                 vm.$scope.selectedPlay.push(play.id);
             })
+            console.log(vm.$scope.selectedPlay)
             console.log(vm.$scope.selectedPlay.length)
             // vm.$scope.selectedPlay = response.data;
         });
