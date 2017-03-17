@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="box-body no-padding">
-          <ul class="clearfix">
+          <ul class="clearfix" ng-if="vm.playlist.videos.length > 0">
             <li ng-repeat="(id, video) in vm.playlist.videos" class="col-sm-6 col-lg-4 col-md-4 col-xs-12">
               <ng-youtube-embed
                 video="video.video_id"
@@ -23,6 +23,7 @@
               <!-- <span ><a ng-click="vm.openEditModal('video-playlist-map', vm, {id:video.id.videoId, playlists:playlists, title: video.snippet.title})" href="javascript:void(0)">Add to playlist</a></span> -->
             </li>
           </ul>
+          <span ng-if="vm.playlist.videos.length == 0">No Songs added yet!!</span>
         </div>
 <!--         <div class="box-footer text-center">
           <a href="javascript:void(0)" class="uppercase">View More</a>
