@@ -1,4 +1,4 @@
-Music Playlist project for msl group recruitment.
+Music Playlist project for msl group recruitment. Hosted on heroku at: http://msl-playlist.herokuapp.com
 
 Create a responsive web app. It should have an option of registering on the app via Email, Facebook or Google (registering should not be mandatory). A registered user should have a profile with relevant information. The web app should allow the user to create, save, edit, delete and share a music playlist. The URL of the playlist should be such that multiple people can listen to the same playlist in real-time. The playlist should be created by using an existing music streaming app’s API (YouTube, Soundcloud etc.).
  
